@@ -1,0 +1,388 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #111111; 
+    color: #ffffff;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    
+    /* Ez garantálja, hogy mindig legyen jobb és bal margó, még mobilon is! */
+    padding: 40px 5%; 
+}
+
+.container {
+    max-width: 1000px; /* Az oszlop maximális vastagsága */
+    margin: 0 auto; /* Középre igazítja az oszlopot */
+    width: 100%;
+}
+
+.top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ez osztja el a menüpontokat egyenletesen */
+    
+    border-top: 1px solid #ffffff; 
+    border-bottom: 1px solid #ffffff; 
+    
+    padding-top: 8px; 
+    padding-bottom: 6px; 
+    margin-bottom: 30px; 
+    
+    font-size: 13px; 
+    font-weight: 500; 
+}
+
+.main-title {
+    font-size: clamp(2.5rem, 8vw, 6rem); 
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    text-align: center;
+    
+    padding-bottom: 15px; 
+    border-bottom: 1px solid #ffffff; 
+    margin-bottom: 30px; 
+    
+    color: #ffffff; /* Alapértelmezett szövegszín */
+    transition: color 250ms ease; /* Sima átmenet a színre */
+}
+
+/* Hover hatás: csak a szöveg színe lesz halvány, a vonal érintetlen marad */
+.main-title:hover {
+    color: rgba(255, 255, 255, 0.05); /* 5%-os átlátszóság csak a szövegre */
+    /* Ha teljesen láthatatlant akarsz, használd ezt: color: transparent; */
+}
+
+
+/* A kép tartója */
+
+/* --- KÉP TÁROLÓK (Téglalap és Négyzet) --- */
+
+/* Eredeti (16:10) tároló */
+.image-wrapper {
+    position: relative;
+    width: 100%; 
+    aspect-ratio: 16 / 10; 
+    overflow: hidden; 
+    background-color: #000; 
+}
+
+/* ÚJ: Négyzetes (1:1) tároló */
+.image-wrapper-square {
+    position: relative;
+    width: 100%; 
+    aspect-ratio: 1 / 1; /* Az 1/1 a standard írásmódja a tökéletes négyzetnek */
+    overflow: hidden; 
+    background-color: #000; 
+}
+
+/* Maga a kép MINDKÉT tárolóban ugyanúgy viselkedjen */
+.image-wrapper img,
+.image-wrapper-square img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+    transition: transform 0.4s ease; /* Sima nagyítás */
+}
+
+/* A sötétítő réteg és a szöveg (ez marad ugyanaz) */
+.image-overlay {
+    position: absolute; 
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    
+    display: flex; align-items: center; justify-content: center;
+    font-size: clamp(1rem, 2.5vw, 1.8rem);
+    font-weight: 300; letter-spacing: 0.05em; text-transform: uppercase; text-align: center;
+    padding: 20px;
+    
+    opacity: 0; transition: opacity 0.4s ease; pointer-events: none; 
+}
+
+/* --- HOVER EFFEKTEK MINDKÉT VÁLTOZATRA --- */
+
+/* Sötétítő réteg megjelenik */
+.image-wrapper:hover .image-overlay,
+.image-wrapper-square:hover .image-overlay {
+    opacity: 1;
+}
+
+/* A kép picit megnő alatta */
+.image-wrapper:hover img,
+.image-wrapper-square:hover img {
+    transform: scale(1.03);
+}
+
+/* --- ALBUM BORÍTÓ HOMÁLYOS HÁTTÉRREL (16:10 keret, 1:1 belső kép) --- */
+
+.image-wrapper-album {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10; /* Megmarad a 16:10-es külső keret */
+    overflow: hidden;
+    background-color: #000;
+    
+    /* Flexbox a belső éles kép középre igazításához */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* A homályos háttérkép */
+.image-wrapper-album .bg-blur {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    
+    /* Itt történik a varázslat: homályosítás és enyhe sötétítés */
+    filter: blur(30px) brightness(0.5); 
+    
+    /* Kicsit felnagyítjuk, hogy a homályosítás szélein ne lógjon be a fekete háttér */
+    transform: scale(1.2); 
+    z-index: 1; /* Legalulra kerül */
+}
+
+/* Az éles, négyzet alakú borító középen */
+.image-wrapper-album .fg-square {
+    position: relative;
+    z-index: 2; /* A háttér fölé kerül */
+    
+    height: 85%; /* Kicsit kisebb, mint a keret magassága, hogy legyen "levegője" */
+    aspect-ratio: 1 / 1; /* Szigorú 1:1 négyzet arány */
+    object-fit: cover;
+    
+    /* Egy szép kis árnyék, hogy kiemelkedjen a háttérből */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); 
+    transition: transform 0.4s ease;
+}
+
+/* Az éles, négyzet alakú borító középen */
+.image-wrapper-album .fg-169 {
+    position: relative;
+    z-index: 2; /* A háttér fölé kerül */
+    
+    height: 90%; /* Kicsit kisebb, mint a keret magassága, hogy legyen "levegője" */
+    aspect-ratio: 16 / 9; /* Szigorú 16:9 arány */
+    object-fit: cover;
+    
+    /* Egy szép kis árnyék, hogy kiemelkedjen a háttérből */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); 
+    transition: transform 0.4s ease;
+}
+
+/* A sötétítő rétegnek legfelül kell lennie */
+.image-wrapper-album .image-overlay {
+    z-index: 3;
+}
+
+/* Hoverkor megjelenik az overlay */
+.image-wrapper-album:hover .image-overlay {
+    opacity: 1;
+}
+
+/* Hoverkor csak a középső, éles kép nő meg egy picit! */
+.image-wrapper-album:hover .fg-square {
+    transform: scale(1.03);
+}
+
+.image-wrapper-album:hover .fg-169 {
+    transform: scale(1.03);
+}
+
+/* --- DUPLA KÉPES ELRENDEZÉS (Egymás melletti portrék) --- */
+
+/* A tartó, ami egymás mellé teszi a két képet */
+.double-image-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Két egyenlő szélességű oszlop */
+    gap: 20px; /* Ez a távolság a két kép között (állíthatod nagyobbra/kisebbre) */
+    width: 100%;
+}
+
+/* Portré (igazolványkép) arányú tároló */
+.image-wrapper-portrait {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5; /* Két 4:5-ös kép egymás mellett adja ki a 16:10-et! */
+    overflow: hidden;
+    background-color: #000;
+}
+
+/* Hogy a portré képekre is működjön a méretezés és a hover effekt */
+.image-wrapper-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.image-wrapper-portrait:hover .image-overlay {
+    opacity: 1;
+}
+
+.image-wrapper-portrait:hover img {
+    transform: scale(1.03);
+}
+
+/* Mobilos nézet: ha nagyon kicsi a képernyő, egymás alá kerüljenek (opcionális, de ajánlott) */
+@media (max-width: 600px) {
+    .double-image-container {
+        grid-template-columns: 1fr; /* Mobilon 1 oszlopos lesz */
+        gap: 40px;
+    }
+}
+
+
+
+.spacer {
+    width: 100%;
+    display: block;
+}
+
+.spacer-tiny {
+    height: 30px; 
+}
+
+.spacer-small {
+    height: 60px; 
+}
+
+.spacer-medium {
+    height: 120px; 
+}
+
+.spacer-large {
+    height: 180px; 
+}
+
+/* Főoldali projektek linkjei */
+.project-link {
+    text-decoration: none; /* Aláhúzás eltávolítása */
+    color: inherit; /* Szín megtartása (fehér) */
+    display: block; /* Hogy az egész blokk kattintható legyen */
+}
+
+/* Egy kis vizuális visszajelzés, ha ráviszed az egeret */
+.project-link:hover .main-title {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+/* Navigációs sáv linkjei (Pl. Vissza a főoldalra) */
+.nav-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    opacity: 0.7;
+}
+
+.info-section {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+/* Táblázat alapbeállításai */
+.info-table {
+    width: 100%;
+    border-collapse: collapse; /* Nagyon fontos, hogy a vonalak összeérjenek */
+    font-size: 0.9rem;
+}
+
+/* Minden cella kap egy vékony alsó vonalat alapértelmezetten */
+.info-table td {
+    padding: 12px 0; /* Térköz a szöveg alatt és felett */
+    text-align: left;
+    width: 50%; /* 2 oszlop, pontosan felezve */
+    
+    /* Vékony, halvány fehér vonal MINDEN cella alján */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
+}
+
+/* A legelső sor TETEJE vastagabb vonal (a HTML class alapján) */
+.table-top-border td {
+    border-top: 2px solid #ffffff; 
+}
+
+/* A legutolsó sor ALJA vastagabb vonal (a HTML class alapján, felülírja a vékonyat) */
+.table-bottom-border td {
+    border-bottom: 2px solid #ffffff !important; 
+}
+
+.info-table td:first-child {
+    font-weight: bold; /* vagy használhatsz 700-at, 800-at is, ha még vastagabbat akarsz */
+}
+
+/* --- BEMUTATKOZÓ SZÖVEG (Jobb oszlop) --- */
+.intro-text {
+    font-size: 1rem; /* Kényelmes olvasási méret */
+    line-height: 1.6; /* Szellős sorköz, hogy elegáns legyen */
+    color: #e0e0e0; /* Egy icipicit halványabb fehér, hogy ne süsse ki a szemet */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Fentről lefelé rendezi a szöveget */
+}
+
+/* --- BEMUTATKOZÓ SZÖVEG (Jobb oszlop) --- */
+.intro-text {
+    font-size: 1rem; 
+    line-height: 1.6; 
+    color: #e0e0e0; 
+    
+    display: flex;
+    flex-direction: column;
+    
+    /* EZ A VARÁZSLAT: Egyenletesen elosztja a bekezdéseket a doboz tetejétől az aljáig */
+    justify-content: space-between; 
+    height: 100%; /* Biztosítja, hogy kitöltse a teljes magasságot */
+}
+
+/* A margókat lenullázzuk, mert a 'space-between' automatikusan kiszámolja a tökéletes távolságot */
+.intro-text p {
+    margin: 0;
+}
+
+/* Az elérhetőségek blokkja */
+.contact-info {
+    margin: 0; /* Ezt is lenullázzuk, a flexbox automatikusan a doboz legaljára tolja */
+    line-height: 2 !important; 
+    font-weight: bold;
+}
+
+/* Egy sor (ikon + szöveg) */
+.contact-item {
+    display: inline-flex;
+    align-items: center; 
+    gap: 10px; 
+}
+
+/* Maga az SVG ikon */
+.contact-icon {
+    width: 18px; 
+    height: 18px;
+    stroke: #ffffff; 
+    flex-shrink: 0; 
+}
+
+/* --- MOBILOS NÉZET FINOMHANGOLÁSA --- */
+@media (max-width: 600px) {
+    .intro-text {
+        font-size: 1.1rem; 
+        
+        /* Mobilon, ahol a szöveg a kép alá csúszik, visszaállítjuk a normál egymás alá rendezést */
+        justify-content: flex-start; 
+        gap: 20px; /* Fix távolság a bekezdések közé mobilon */
+        margin-top: 10px;
+    }
+}
+
