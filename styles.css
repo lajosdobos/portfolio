@@ -50,6 +50,13 @@ body {
     transition: color 250ms ease; /* Sima átmenet a színre */
 }
 
+h3.main-title {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 18px;
+}
+
 /* Hover hatás: csak a szöveg színe lesz halvány, a vonal érintetlen marad */
 .main-title:hover {
     color: rgba(255, 255, 255, 0.05); /* 5%-os átlátszóság csak a szövegre */

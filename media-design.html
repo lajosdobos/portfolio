@@ -23,6 +23,8 @@
 
         <h1 class="main-title">Video</h1>
 
+        <div class="spacer spacer-tiny"></div>
+
         <a href="https://www.youtube.com/watch?v=CjlSJ_ey8yc" class="project-link" target="_blank" rel="noopener noreferrer">
             <div class="image-wrapper-album">
                 <img src="img/brenda001.png" class="bg-blur" alt="Music video for Brenda">
@@ -92,10 +94,14 @@
 
         <div class="spacer spacer-tiny"></div>
 
+        <h3 class="main-title">TV APE</h3>
+
+        <div class="spacer spacer-tiny"></div>
+
         <a href="https://www.youtube.com/watch?v=ivHZzHtLV5o" class="project-link" target="_blank" rel="noopener noreferrer">
             <div class="image-wrapper-album">
-                <img src="img/tamas003.png" class="bg-blur" alt="FÉNYDÓM 2. - LIGHT ART IN THE BIODOME">
-                <img src="img/tamas003.png" class="fg-169" alt="FÉNYDÓM 2. - LIGHT ART IN THE BIODOME">
+                <img src="img/dom002.png" class="bg-blur" alt="FÉNYDÓM 2. - LIGHT ART IN THE BIODOME">
+                <img src="img/dom002.png" class="fg-169" alt="FÉNYDÓM 2. - LIGHT ART IN THE BIODOME">
                 <div class="image-overlay">TV APE (LIGHT ART IN THE BIODOME)</div>
             </div>
         </a>
@@ -123,13 +129,43 @@
             </table>
         </div>
 
+        <div class="gallery-section">
+            <div class="gallery-carousel">
+                <button class="gallery-arrow gallery-arrow-left" aria-label="Scroll left">‹</button>
+                <div class="image-gallery" aria-label="Brenda video images">
+                    <div class="gallery-card" data-gallery-index="0">
+                        <img src="img/dom001.png" alt="light art tv ape video still 1">
+                    </div>
+                     <div class="gallery-card" data-gallery-index="4">
+                        <img src="img/dom006.jpg" alt="light art tv ape video still 3">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="4">
+                        <img src="img/dom007.jpg" alt="light art tv ape video still 3">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="4">
+                        <img src="img/dom008.JPG" alt="light art tv ape video still 3">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="4">
+                        <img src="img/dom004.jpg" alt="light art tv ape video still 3">
+                    </div>
+                     <div class="gallery-card" data-gallery-index="4">
+                        <img src="img/dom005.jpg" alt="light art tv ape video still 3">
+                    </div>
+                </div>
+                <button class="gallery-arrow gallery-arrow-right" aria-label="Scroll right">›</button>
+            </div>
+        </div>
+
+        <div class="spacer spacer-tiny"></div>
+
+        <h3 class="main-title">VIDEOTOM x DRONALDO </h3>
 
         <div class="spacer spacer-tiny"></div>
 
         <a href="https://www.youtube.com/watch?v=npX6863kHVo" class="project-link" target="_blank" rel="noopener noreferrer">
             <div class="image-wrapper-album">
-                <img src="img/tamas001.png" class="bg-blur" alt="VIDEOTOM x DRONALDO (Hengermalom Kelesztés)">
-                <img src="img/tamas001.png" class="fg-169" alt="VIDEOTOM x DRONALDO (Hengermalom Kelesztés)">
+                <img src="img/hengermalom.png" class="bg-blur" alt="VIDEOTOM x DRONALDO (Hengermalom Kelesztés)">
+                <img src="img/hengermalom.png" class="fg-169" alt="VIDEOTOM x DRONALDO (Hengermalom Kelesztés)">
                 <div class="image-overlay">VIDEOTOM x DRONALDO (Hengermalom Kelesztés)</div>
             </div>
         </a>
@@ -156,6 +192,10 @@
                 </tr>
             </table>
         </div>
+
+        <div class="spacer spacer-tiny"></div>
+
+        <h3 class="main-title">HCW Documentary</h3>
 
         <div class="spacer spacer-tiny"></div>
 
@@ -190,6 +230,9 @@
             </table>
         </div>
 
+        <div class="spacer spacer-tiny"></div>
+
+        <h3 class="main-title">Nyugalom</h3>
 
         <div class="spacer spacer-tiny"></div>
 
@@ -245,18 +288,19 @@
         });
     }
 
-    const galleryCards = Array.from(document.querySelectorAll('.gallery-card'));
     const previewOverlay = document.querySelector('.gallery-preview-overlay');
     const previewImage = previewOverlay?.querySelector('.preview-image');
     const previewClose = previewOverlay?.querySelector('.preview-close');
     const previewPrev = previewOverlay?.querySelector('.preview-prev');
     const previewNext = previewOverlay?.querySelector('.preview-next');
+    let currentGalleryCards = [];
     let currentIndex = 0;
 
-    const openPreview = (index) => {
+    const openPreview = (cards, index) => {
+        currentGalleryCards = cards;
         currentIndex = index;
-        const card = galleryCards[currentIndex];
-        const img = card.querySelector('img');
+        const card = currentGalleryCards[currentIndex];
+        const img = card?.querySelector('img');
         if (!img || !previewImage) return;
         previewImage.src = img.src;
         previewImage.alt = img.alt;
@@ -272,18 +316,24 @@
     };
 
     const showNext = () => {
-        currentIndex = (currentIndex + 1) % galleryCards.length;
-        openPreview(currentIndex);
+        if (!currentGalleryCards.length) return;
+        currentIndex = (currentIndex + 1) % currentGalleryCards.length;
+        openPreview(currentGalleryCards, currentIndex);
     };
 
     const showPrev = () => {
-        currentIndex = (currentIndex - 1 + galleryCards.length) % galleryCards.length;
-        openPreview(currentIndex);
+        if (!currentGalleryCards.length) return;
+        currentIndex = (currentIndex - 1 + currentGalleryCards.length) % currentGalleryCards.length;
+        openPreview(currentGalleryCards, currentIndex);
     };
 
-    galleryCards.forEach((card, index) => {
-        card.style.cursor = 'pointer';
-        card.addEventListener('click', () => openPreview(index));
+    document.querySelectorAll('.gallery-carousel').forEach((carousel) => {
+        const gallery = carousel.querySelector('.image-gallery');
+        const cards = Array.from(gallery.querySelectorAll('.gallery-card'));
+        cards.forEach((card, index) => {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', () => openPreview(cards, index));
+        });
     });
 
     previewClose?.addEventListener('click', closePreview);
