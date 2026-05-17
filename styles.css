@@ -126,10 +126,11 @@ h3.main-title {
 
 /* --- ALBUM BORÍTÓ HOMÁLYOS HÁTTÉRREL (16:10 keret, 1:1 belső kép) --- */
 
-.image-wrapper-album {
+.image-wrapper-album,
+.image-wrapper-cinematic,
+.image-wrapper-169 {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 10; /* Megmarad a 16:10-es külső keret */
     overflow: hidden;
     background-color: #000;
     
@@ -137,6 +138,18 @@ h3.main-title {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.image-wrapper-album {
+    aspect-ratio: 16 / 10; /* Megmarad a 16:10-es külső keret */
+}
+
+.image-wrapper-169 {
+    aspect-ratio: 16 / 9; /* Same size as 16:9 blocks */
+}
+
+.image-wrapper-cinematic {
+    aspect-ratio: 239 / 100; /* 2.39:1 cinematic crop */
 }
 
 .gallery-section {
@@ -319,7 +332,9 @@ h3.main-title {
 }
 
 /* A homályos háttérkép */
-.image-wrapper-album .bg-blur {
+.image-wrapper-album .bg-blur,
+.image-wrapper-cinematic .bg-blur,
+.image-wrapper-169 .bg-blur {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
@@ -361,13 +376,32 @@ h3.main-title {
     transition: transform 0.4s ease;
 }
 
+/* Az éles, cinematic arányú borító középen */
+.image-wrapper-cinematic .fg-cinematic,
+.image-wrapper-169 .fg-cinematic {
+    position: relative;
+    z-index: 2; /* A háttér fölé kerül */
+    
+    height: 90%; /* Kicsit kisebb, mint a keret magassága, hogy legyen "levegője" */
+    aspect-ratio: 239 / 100; /* 2.39:1 arány */
+    object-fit: cover;
+    
+    /* Egy szép kis árnyék, hogy kiemelkedjen a háttérből */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); 
+    transition: transform 0.4s ease;
+}
+
 /* A sötétítő rétegnek legfelül kell lennie */
-.image-wrapper-album .image-overlay {
+.image-wrapper-album .image-overlay,
+.image-wrapper-cinematic .image-overlay,
+.image-wrapper-169 .image-overlay {
     z-index: 3;
 }
 
 /* Hoverkor megjelenik az overlay */
-.image-wrapper-album:hover .image-overlay {
+.image-wrapper-album:hover .image-overlay,
+.image-wrapper-cinematic:hover .image-overlay,
+.image-wrapper-169:hover .image-overlay {
     opacity: 1;
 }
 
@@ -376,7 +410,9 @@ h3.main-title {
     transform: scale(1.03);
 }
 
-.image-wrapper-album:hover .fg-169 {
+.image-wrapper-album:hover .fg-169,
+.image-wrapper-cinematic:hover .fg-cinematic,
+.image-wrapper-169:hover .fg-cinematic {
     transform: scale(1.03);
 }
 
