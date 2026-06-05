@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV APE</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<video autoplay muted loop playsinline webkit-playsinline preload="auto" id="bg-video">
+    <source src="img/bg_glitch6.mp4" type="video/mp4">
+</video>
+
+    <a class="project-nav-arrow project-nav-left" href="brenda.html" aria-label="Previous project">‹</a>
+    <a class="project-nav-arrow project-nav-right" href="videotom-dronaldo.html" aria-label="Next project">›</a>
+
+    <div class="container">
+                                <header class="top-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="musical-projects.html" class="nav-link">Audio</a>
+            <div class="nav-dropdown">
+                <a href="media-design.html" class="nav-link">Video</a>
+                <div class="nav-dropdown-menu">
+                    <a href="oaken.html" class="dropdown-item">Oaken x Boru</a>
+                    <a href="brenda.html" class="dropdown-item">Music Video for Brenda</a>
+                    <a href="tv-ape.html" class="dropdown-item">TV Ape</a>
+                    <a href="videotom-dronaldo.html" class="dropdown-item">Hengermalom Kelesztés</a>
+                    <a href="hcw-documentary.html" class="dropdown-item">HCW Video Documentary</a>
+                    <a href="nyugalom.html" class="dropdown-item">Nyugalom</a>
+                </div>
+            </div>
+            <a href="info.html" class="nav-link">Contact</a>
+            <a href="https://www.instagram.com/dronaldo___" class="nav-link" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </header>
+
+        <h1 class="main-title">Video</h1>
+        <div class="spacer spacer-tiny"></div>
+
+        <a href="https://www.youtube.com/watch?v=ivHZzHtLV5o" class="project-link" target="_blank" rel="noopener noreferrer">
+            <div class="image-wrapper-album">
+                <img src="img/dom002.png" class="bg-blur" alt="TV APE light art installation">
+                <img src="img/dom002.png" class="fg-169" alt="TV APE light art installation">
+                <div class="image-overlay">TV APE (LIGHT ART IN THE BIODOME)</div>
+            </div>
+        </a>
+
+        <div class="spacer spacer-tiny"></div>
+
+        <h3 class="main-title">TV APE (LIGHT ART IN THE BIODOME)</h3>
+
+        <div class="project-detail-grid">
+            <div class="project-description">
+                <div class="section-card">
+                    <div class="section-label">PROJECT INFO</div>
+                    <table class="info-table">
+                        <tr class="table-top-border">
+                            <td>Title:</td>
+                            <td>TV APE</td>
+                        </tr>
+                        <tr>
+                            <td>Role:</td>
+                            <td>Installation, Sound design</td>
+                        </tr>
+                        <tr>
+                            <td>Category:</td>
+                            <td>Light art installation</td>
+                        </tr>
+                        <tr class="table-bottom-border">
+                            <td>Release date:</td>
+                            <td>Jan 13, 2025</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="main-title">STILLS // BEHIND THE SCENES</h3>
+
+        <div class="gallery-section">
+            <div class="gallery-carousel">
+                <button class="gallery-arrow gallery-arrow-left" aria-label="Scroll left">‹</button>
+                <div class="image-gallery" aria-label="TV APE images">
+                    <div class="gallery-card" data-gallery-index="0">
+                        <img src="img/dom001.png" alt="light art tv ape video still 1">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="4">
+                        <img src="img/dom006.JPG" alt="light art tv ape video still 3">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="4">
+                        <img src="img/dom007.JPG" alt="light art tv ape video still 3">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="4">
+                        <img src="img/dom008.JPG" alt="light art tv ape video still 3">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="4">
+                        <img src="img/dom004.JPG" alt="light art tv ape video still 3">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="4">
+                        <img src="img/dom005.JPG" alt="light art tv ape video still 3">
+                    </div>
+                </div>
+                <button class="gallery-arrow gallery-arrow-right" aria-label="Scroll right">›</button>
+            </div>
+        </div>
+
+        <div class="gallery-preview-overlay" aria-hidden="true">
+            <button class="preview-close" aria-label="Close preview">×</button>
+            <button class="preview-arrow preview-prev" aria-label="Previous image">‹</button>
+            <div class="preview-image-wrapper">
+                <img class="preview-image" src="" alt="" />
+            </div>
+            <button class="preview-arrow preview-next" aria-label="Next image">›</button>
+        </div>
+
+    </div>
+
+<script>
+    document.querySelectorAll('.gallery-carousel').forEach((galleryCarousel) => {
+        const gallery = galleryCarousel.querySelector('.image-gallery');
+        const prevBtn = galleryCarousel.querySelector('.gallery-arrow-left');
+        const nextBtn = galleryCarousel.querySelector('.gallery-arrow-right');
+        const scrollAmount = () => gallery.clientWidth * 0.9;
+
+        prevBtn?.addEventListener('click', () => {
+            gallery.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+        });
+        nextBtn?.addEventListener('click', () => {
+            gallery.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+        });
+    });
+
+    const previewOverlay = document.querySelector('.gallery-preview-overlay');
+    const previewImage = previewOverlay?.querySelector('.preview-image');
+    const previewClose = previewOverlay?.querySelector('.preview-close');
+    const previewPrev = previewOverlay?.querySelector('.preview-prev');
+    const previewNext = previewOverlay?.querySelector('.preview-next');
+    let currentGalleryCards = [];
+    let currentIndex = 0;
+
+    const openPreview = (cards, index) => {
+        currentGalleryCards = cards;
+        currentIndex = index;
+        const card = currentGalleryCards[currentIndex];
+        const img = card?.querySelector('img');
+        if (!img || !previewImage) return;
+        previewImage.src = img.src;
+        previewImage.alt = img.alt;
+        previewOverlay?.setAttribute('aria-hidden', 'false');
+        previewOverlay?.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closePreview = () => {
+        previewOverlay?.setAttribute('aria-hidden', 'true');
+        previewOverlay?.classList.remove('visible');
+        document.body.style.overflow = '';
+    };
+
+    const showNext = () => {
+        if (!currentGalleryCards.length) return;
+        currentIndex = (currentIndex + 1) % currentGalleryCards.length;
+        openPreview(currentGalleryCards, currentIndex);
+    };
+
+    const showPrev = () => {
+        if (!currentGalleryCards.length) return;
+        currentIndex = (currentIndex - 1 + currentGalleryCards.length) % currentGalleryCards.length;
+        openPreview(currentGalleryCards, currentIndex);
+    };
+
+    document.querySelectorAll('.gallery-carousel').forEach((carousel) => {
+        const gallery = carousel.querySelector('.image-gallery');
+        const cards = Array.from(gallery.querySelectorAll('.gallery-card'));
+        cards.forEach((card, index) => {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', () => openPreview(cards, index));
+        });
+    });
+
+    previewClose?.addEventListener('click', closePreview);
+    previewPrev?.addEventListener('click', showPrev);
+    previewNext?.addEventListener('click', showNext);
+
+    previewOverlay?.addEventListener('click', (event) => {
+        if (event.target === previewOverlay) {
+            closePreview();
+        }
+    });
+
+    window.addEventListener('keydown', (event) => {
+        if (!previewOverlay?.classList.contains('visible')) return;
+        if (event.key === 'Escape') closePreview();
+        if (event.key === 'ArrowRight') showNext();
+        if (event.key === 'ArrowLeft') showPrev();
+    });
+</script>
+</body>
+</html>
