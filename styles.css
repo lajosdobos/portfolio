@@ -460,7 +460,7 @@ h3.main-title {
     position: relative;
     z-index: 2; /* A háttér fölé kerül */
     
-    height: 80%; /* Kicsit kisebb, mint a keret magassága, hogy legyen "levegője" */
+    height: 100%; /* Kicsit kisebb, mint a keret magassága, hogy legyen "levegője" */
     aspect-ratio: 16 / 9; /* Szigorú 16:9 arány */
     object-fit: cover;
     
@@ -773,6 +773,73 @@ h3.main-title {
 @media (max-width: 600px) {
     .project-detail-grid {
         gap: 24px;
+    }
+}
+
+/* --- AUDIO PAGE GRID LAYOUT --- */
+.audio-item-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.audio-item-grid.audio-item-grid--reverse {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+}
+
+.audio-item-grid .audio-image-block {
+    display: grid;
+    gap: 20px;
+}
+
+.audio-item-grid .audio-image-block .image-wrapper-album,
+.audio-item-grid .audio-image-block .image-wrapper-169,
+.audio-item-grid .audio-image-block .image-wrapper-cinematic {
+    width: 100%;
+}
+
+.audio-details-card,
+.audio-item-grid .section-card {
+    width: 100%;
+}
+
+.audio-details-card {
+    padding: 24px 24px 26px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.audio-item-grid .info-section {
+    margin: 0;
+    width: 100%;
+}
+
+.audio-item-grid .section-label {
+    margin-bottom: 20px;
+}
+
+.audio-item-grid .crew-row {
+    grid-template-columns: 140px 1fr;
+    column-gap: 22px;
+}
+
+.audio-item-grid .crew-label,
+.audio-item-grid .crew-value,
+.audio-item-grid .info-table td {
+    color: #e2e2e2;
+}
+
+@media (max-width: 900px) {
+    .audio-item-grid {
+        grid-template-columns: 1fr;
+    }
+    .audio-item-grid.audio-item-grid--reverse {
+        grid-template-columns: 1fr;
+    }
+    .audio-details-card {
+        padding: 20px 20px 22px;
     }
 }
 
