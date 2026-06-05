@@ -55,6 +55,7 @@ h3.main-title {
     padding-bottom: 0;
     border-bottom: none;
     margin-bottom: 18px;
+    text-align: left;
 }
 
 /* Hover hatás: csak a szöveg színe lesz halvány, a vonal érintetlen marad */
@@ -556,6 +557,125 @@ h3.main-title {
     width: 100%;
     margin-top: 20px;
     margin-bottom: 60px;
+}
+
+.project-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) 0.9fr;
+    gap: 48px;
+    align-items: flex-start;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding: 28px 28px 32px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.16));
+    backdrop-filter: blur(6px);
+}
+
+.project-description,
+.project-crew-block {
+    width: 100%;
+}
+
+.section-label {
+    font-family: 'VT323', monospace;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    color: #ffffff;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.project-description p {
+    font-size: 1rem;
+    line-height: 1.95;
+    color: #e0e0e0;
+    width: 100%;
+    max-width: none;
+}
+
+.section-card + .section-card {
+    margin-top: 32px;
+}
+
+.project-crew-block {
+    display: grid;
+    gap: 24px;
+}
+
+.section-card {
+    width: 100%;
+}
+
+.project-detail-grid .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+.project-detail-grid .info-table .table-top-border td,
+.project-detail-grid .info-table .table-bottom-border td {
+    border: none !important;
+}
+
+.project-detail-grid .info-table td {
+    padding: 8px 0;
+    text-align: left;
+    width: 50%;
+    border: none;
+    color: #e0e0e0;
+}
+
+.project-detail-grid .info-table td:first-child {
+    font-weight: 700;
+    color: #ffffff;
+    padding-right: 24px;
+}
+
+.crew-list {
+    display: grid;
+    gap: 6px;
+    color: #e0e0e0;
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.crew-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    column-gap: 24px;
+    align-items: start;
+}
+
+.crew-label {
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.92rem;
+    opacity: 0.7;
+    line-height: 1.7;
+}
+
+.crew-value {
+    font-family: 'VT323', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.75;
+    color: #e0e0e0;
+}
+
+@media (max-width: 900px) {
+    .project-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .project-detail-grid {
+        gap: 24px;
+    }
 }
 
 /* Táblázat alapbeállításai */
