@@ -455,11 +455,12 @@ h3.main-title {
 }
 
 /* Az éles, négyzet alakú borító középen */
-.image-wrapper-album .fg-169 {
+.image-wrapper-album .fg-169,
+.image-wrapper-169 .fg-169 {
     position: relative;
     z-index: 2; /* A háttér fölé kerül */
     
-    height: 100%; /* Kicsit kisebb, mint a keret magassága, hogy legyen "levegője" */
+    height: 80%; /* Kicsit kisebb, mint a keret magassága, hogy legyen "levegője" */
     aspect-ratio: 16 / 9; /* Szigorú 16:9 arány */
     object-fit: cover;
     
@@ -508,6 +509,7 @@ h3.main-title {
 }
 
 .image-wrapper-album:hover .fg-169,
+.image-wrapper-169:hover .fg-169,
 .image-wrapper-cinematic:hover .fg-cinematic,
 .image-wrapper-169:hover .fg-cinematic {
     transform: scale(1.03);
