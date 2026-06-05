@@ -451,7 +451,7 @@ h3.main-title {
     position: relative;
     z-index: 2; /* A háttér fölé kerül */
     
-    height: 90%; /* Kicsit kisebb, mint a keret magassága, hogy legyen "levegője" */
+    height: 100%; /* Kicsit kisebb, mint a keret magassága, hogy legyen "levegője" */
     aspect-ratio: 16 / 9; /* Szigorú 16:9 arány */
     object-fit: cover;
     
@@ -460,13 +460,18 @@ h3.main-title {
     transition: transform 0.4s ease;
 }
 
+.image-wrapper-169 .brenda-image {
+    height: 75%;
+    width: auto;
+}
+
 /* Az éles, cinematic arányú borító középen */
 .image-wrapper-cinematic .fg-cinematic,
 .image-wrapper-169 .fg-cinematic {
     position: relative;
     z-index: 2; /* A háttér fölé kerül */
     
-    height: 90%; /* Kicsit kisebb, mint a keret magassága, hogy legyen "levegője" */
+    height: 100%; /* Kicsit kisebb, mint a keret magassága, hogy legyen "levegője" */
     aspect-ratio: 239 / 100; /* 2.39:1 arány */
     object-fit: cover;
     
