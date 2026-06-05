@@ -139,6 +139,14 @@ h3.main-title {
     border-bottom: none;
     margin-bottom: 18px;
     text-align: left;
+    max-width: calc(100% - 56px);
+    margin-left: 28px;
+    margin-right: 28px;
+}
+
+.gallery-section {
+    margin-left: 28px;
+    margin-right: 28px;
 }
 
 /* Hover hatás: csak a szöveg színe lesz halvány, a vonal érintetlen marad */
