@@ -43,13 +43,14 @@
             <a href="https://www.instagram.com/dronaldo___" class="nav-link" target="_blank" rel="noopener noreferrer">Instagram</a>
         </header>
 
-        <a href="https://www.youtube.com/watch?v=CjlSJ_ey8yc" class="project-link" target="_blank" rel="noopener noreferrer">
-            <div class="image-wrapper-album">
+        <div class="project-link project-link-video">
+            <div id="brenda-video-poster" class="image-wrapper-album" role="button" tabindex="0" aria-label="Play video for Brenda – Te Falta La Ene’" style="cursor:pointer;">
                 <img src="img/brenda001.png" class="bg-blur" alt="Music video for Brenda">
                 <img src="img/brenda001.png" class="fg-169" alt="Music video for Brenda">
-                <div class="image-overlay">Brenda – Te Falta La Ene’</div>
+                <div class="image-overlay">Brenda - Te Falta la Eñe (Video Oficial)</div>
             </div>
-        </a>
+            <div id="brenda-video-player" class="project-video-wrapper" style="display:none; position:relative; width:100%; aspect-ratio:16 / 10;"></div>
+        </div>
 
         <div class="spacer spacer-tiny"></div>
 
@@ -165,28 +166,55 @@
             </div>
         </div>
 
-        <h3 class="main-title">STILLS // BEHIND THE SCENES</h3>
+        <h3 class="main-title">MOODBOARDS // STILLS // BEHIND THE SCENES</h3>
 
         <div class="gallery-section">
             <div class="gallery-carousel">
                 <button class="gallery-arrow gallery-arrow-left" aria-label="Scroll left">‹</button>
                 <div class="image-gallery" aria-label="Brenda video images">
                     <div class="gallery-card" data-gallery-index="0">
-                        <img src="img/brenda002.png" alt="Brenda video still 1">
-                    </div>
-                    <div class="gallery-card" data-gallery-index="4">
-                        <img src="img/11.png" alt="Brenda video still 3">
-                    </div>
-                    <div class="gallery-card" data-gallery-index="2">
-                        <img src="img/8.png" alt="Brenda video still 3">
+                        <img src="img/werk/brenda-moodboard.png" alt="Werk Day1-10 still">
                     </div>
                     <div class="gallery-card" data-gallery-index="1">
-                        <img src="img/6.png" alt="Brenda video still 2">
+                        <img src="img/werk/brenda-brief.png" alt="Werk Day1-10 still">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="2">
+                        <img src="img/werk/brenda-animatik.png" alt="Werk Day1-10 still">
                     </div>
                     <div class="gallery-card" data-gallery-index="3">
-                        <img src="img/9.png" alt="Brenda video still 3">
+                        <img src="img/werk/Werk_Day1-10.jpg" alt="Werk Day1-10 still">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="4">
+                        <img src="img/werk/Werk_Day1-17.jpg" alt="Werk Day1-17 still">
                     </div>
                     <div class="gallery-card" data-gallery-index="5">
+                        <img src="img/werk/Werk_Day1-19.jpg" alt="Werk Day1-19 still">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="6">
+                        <img src="img/werk/Werk_Day1-24.jpg" alt="Werk Day1-24 still">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="7">
+                        <img src="img/werk/Werk_Day1-3.jpg" alt="Werk Day1-3 still">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="8">
+                        <img src="img/werk/Werk_Day1-32.jpg" alt="Werk Day1-32 still">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="9">
+                        <img src="img/brenda002.png" alt="Brenda video still 1">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="10">
+                        <img src="img/11.png" alt="Brenda video still 3">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="11">
+                        <img src="img/8.png" alt="Brenda video still 3">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="12">
+                        <img src="img/6.png" alt="Brenda video still 2">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="13">
+                        <img src="img/9.png" alt="Brenda video still 3">
+                    </div>
+                    <div class="gallery-card" data-gallery-index="14">
                         <img src="img/brenda003.png" alt="Brenda video still 3">
                     </div>
                 </div>
@@ -283,6 +311,37 @@
         if (event.key === 'Escape') closePreview();
         if (event.key === 'ArrowRight') showNext();
         if (event.key === 'ArrowLeft') showPrev();
+    });
+
+    const playBrendaVideo = () => {
+        const poster = document.getElementById('brenda-video-poster');
+        const player = document.getElementById('brenda-video-player');
+        if (!poster || !player) return;
+        if (!player.querySelector('iframe')) {
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://player.vimeo.com/video/1199054578?autoplay=1';
+            iframe.frameBorder = '0';
+            iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+            iframe.allowFullscreen = true;
+            iframe.title = 'Brenda – Te Falta La Ene’';
+            iframe.style.position = 'absolute';
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            player.appendChild(iframe);
+        }
+        poster.style.display = 'none';
+        player.style.display = 'block';
+    };
+
+    const brendaPoster = document.getElementById('brenda-video-poster');
+    brendaPoster?.addEventListener('click', playBrendaVideo);
+    brendaPoster?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            playBrendaVideo();
+        }
     });
 </script>
 </body>
