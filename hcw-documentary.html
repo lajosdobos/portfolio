@@ -43,13 +43,14 @@
             <a href="https://www.instagram.com/dronaldo___" class="nav-link" target="_blank" rel="noopener noreferrer">Instagram</a>
         </header>
 
-        <a href="https://vimeo.com/1099905895" class="project-link" target="_blank" rel="noopener noreferrer">
-            <div class="image-wrapper-album">
+        <div class="project-link project-link-video">
+            <div id="hcw-video-poster" class="image-wrapper-album" role="button" tabindex="0" aria-label="Play video for HCW documentary trailer" style="cursor:pointer;">
                 <img src="img/hcw-videoriport.png" class="bg-blur" alt="HCW documentary">
                 <img src="img/hcw-videoriport.png" class="fg-169" alt="HCW documentary">
                 <div class="image-overlay">HCW documentary (Short documentary)</div>
             </div>
-        </a>
+            <div id="hcw-video-player" class="project-video-wrapper" style="display:none; position:relative; width:100%; aspect-ratio:16 / 10;"></div>
+        </div>
 
         <div class="spacer spacer-tiny"></div>
 
@@ -115,5 +116,41 @@
         </div>
 
     </div>
+
+
+<script>
+
+    const playHCWVideo = () => {
+        const poster = document.getElementById('hcw-video-poster');
+        const player = document.getElementById('hcw-video-player');
+        if (!poster || !player) return;
+        if (!player.querySelector('iframe')) {
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://player.vimeo.com/video/1199157576?autoplay=1';
+            iframe.frameBorder = '0';
+            iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+            iframe.allowFullscreen = true;
+            iframe.title = 'HCW Documentary';
+            iframe.style.position = 'absolute';
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            player.appendChild(iframe);
+        }
+        poster.style.display = 'none';
+        player.style.display = 'block';
+    };
+
+    const hcwPoster = document.getElementById('hcw-video-poster');
+    hcwPoster?.addEventListener('click', playHCWVideo);
+    hcwPoster?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            playHCWVideo();
+        }
+    });
+</script>
+
 </body>
 </html>
