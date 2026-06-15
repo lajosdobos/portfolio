@@ -43,10 +43,13 @@
             <a href="https://www.instagram.com/dronaldo___" class="nav-link" target="_blank" rel="noopener noreferrer">Instagram</a>
         </header>
 
-        <div class="image-wrapper-169">
+        <div class="project-link project-link-video">
+            <div id="oaken-video-poster" class="image-wrapper-album" role="button" tabindex="0" aria-label="Play video for Oaken x Boru – Feketezaj 2026 Trailer" style="cursor:pointer;">
             <img src="img/gabona.png" class="bg-blur" alt="Music video for Oaken x Boru">
             <img src="img/gabona.png" class="fg-cinematic" alt="Music video for Oaken x Boru">
-            <div class="image-overlay">Oaken x Boru (Music Video)</div>
+                <div class="image-overlay">Oaken x Boru - Feketezaj 2026 Trailer</div>
+            </div>
+            <div id="oaken-video-player" class="project-video-wrapper" style="display:none; position:relative; width:100%; aspect-ratio:16 / 10;"></div>
         </div>
 
         <div class="spacer spacer-tiny"></div>
@@ -236,8 +239,15 @@
     const previewClose = previewOverlay?.querySelector('.preview-close');
     const previewPrev = previewOverlay?.querySelector('.preview-prev');
     const previewNext = previewOverlay?.querySelector('.preview-next');
+    const pageNavArrows = document.querySelectorAll('.project-nav-arrow');
     let currentGalleryCards = [];
     let currentIndex = 0;
+
+    const setPageNavVisibility = (visible) => {
+        pageNavArrows.forEach((arrow) => {
+            arrow.style.display = visible ? '' : 'none';
+        });
+    };
 
     const openPreview = (cards, index) => {
         currentGalleryCards = cards;
@@ -250,12 +260,14 @@
         previewOverlay?.setAttribute('aria-hidden', 'false');
         previewOverlay?.classList.add('visible');
         document.body.style.overflow = 'hidden';
+        setPageNavVisibility(false);
     };
 
     const closePreview = () => {
         previewOverlay?.setAttribute('aria-hidden', 'true');
         previewOverlay?.classList.remove('visible');
         document.body.style.overflow = '';
+        setPageNavVisibility(true);
     };
 
     const showNext = () => {
@@ -294,6 +306,37 @@
         if (event.key === 'Escape') closePreview();
         if (event.key === 'ArrowRight') showNext();
         if (event.key === 'ArrowLeft') showPrev();
+    });
+
+    const playOakenVideo = () => {
+        const poster = document.getElementById('oaken-video-poster');
+        const player = document.getElementById('oaken-video-player');
+        if (!poster || !player) return;
+        if (!player.querySelector('iframe')) {
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://player.vimeo.com/video/1201352937?autoplay=1';
+            iframe.frameBorder = '0';
+            iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+            iframe.allowFullscreen = true;
+            iframe.title = 'Oaken x Boru Feketezaj 2026 Trailer';
+            iframe.style.position = 'absolute';
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            player.appendChild(iframe);
+        }
+        poster.style.display = 'none';
+        player.style.display = 'block';
+    };
+
+    const oakenPoster = document.getElementById('oaken-video-poster');
+    oakenPoster?.addEventListener('click', playOakenVideo);
+    oakenPoster?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            playOakenVideo();
+        }
     });
 </script>
 </body>
