@@ -1,13 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-@font-face {
-    font-family: 'Home Video';
-    src: url('fonts/HomeVideo.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -17,7 +9,7 @@
 body {
     background-color: #111111; 
     color: #ffffff;
-    font-family: 'Home Video', 'VT323', monospace;
+    font-family: 'VT323', monospace;
     padding: 40px 5%; 
 }
 
@@ -683,7 +675,7 @@ h3.main-title {
 }
 
 .section-label {
-    font-family: 'Home Video', 'VT323', monospace;
+    font-family: 'VT323', monospace;
     font-size: 1rem;
     font-weight: 400;
     letter-spacing: 0.18em;
@@ -756,7 +748,7 @@ h3.main-title {
 }
 
 .crew-label {
-    font-family: 'Home Video', 'VT323', monospace;
+    font-family: 'VT323', monospace;
     text-transform: uppercase;
     letter-spacing: 0.18em;
     font-size: 0.92rem;
@@ -765,7 +757,7 @@ h3.main-title {
 }
 
 .crew-value {
-   font-family: 'Home Video', 'VT323', monospace;
+    font-family: 'VT323', monospace;
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.75;
